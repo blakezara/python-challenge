@@ -79,25 +79,28 @@ with open(csvdata, "r", newline= '') as csv_fileX:
         # appending employee ID
         empid.append(row[0])
 
-        # split first namr from last and then append both
+        # split first name from last and then append both
         name = row[1].split(" ") 
         firstname.append(name[0]) 
         lastname.append(name[1]) 
 
         # appending birthday
-        birthday = row[2].split("-") 
+        # birthday = row[2].split("-") 
         newbirthday =(row[2].split('-')[1] + '/' + row[2].split('-')[2] + '/' + row[2].split('-')[0])
         birthday.append(newbirthday)
 
          #appending social
-        social = row[3].split("-") 
-        new_ssn = ("***-**-" +social[2]) 
+        social_part = row[3].split("-") 
+        new_ssn = ("***-**-" +social_part[2]) 
         social.append(new_ssn) 
 
         # loop dictionary to change to abbreviation
         state.append(stateabbrev[row[4]])
 
 new_data = zip(empid, firstname, lastname, birthday, social, state)
+
+
+
 
 
 #open and writes to csv

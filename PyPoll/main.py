@@ -10,14 +10,11 @@ csvdata= os.path.join("election_data_1.csv")
 total_votes = 0
 winner = 0
 
-
-
 #Lists
 candidates =[]
 votes =[]
+vote_percent = []
 
-# dictionary in order to find percent (list indices unordered)
-vote_percent ={}
 
 
 # Dictionary for Keys and Values row2 is key row1 as total count/value?
@@ -35,35 +32,39 @@ with open(csvdata, "r", newline= '') as csv_fileX:
         if row[2] in the_poll.keys():
             the_poll[row[2]] = the_poll[row[2]] + 1
         else:
-            the_poll[row[2]]= 1 
+            the_poll[row[2]]= 1
 
+          
 
 # append the keys (candidates) and values (votes)
     for key, value in the_poll.items():
         candidates.append(key)
-        votes.append(value)
-        
-        
+        votes.append(value) 
+    print(candidates)
+    print(votes)
+
 
 #find vote percent of votes with the dictionary
     for key, value in the_poll.items():
-        vote_percent[key] = round((value)/(total_votes)*100, 2)
-        
-        
+        vote_percent.append(round((value)/(total_votes)*100))
+    print(vote_percent)
 
 #create new list with appended lists using zip
 the_poll_final = zip(candidates, votes, vote_percent)
 
 
 #find winner
-for total_votes in the_poll_final:
-    winner = max(vote_percent)
+#for total_votes in the_poll_final:
+ #   print(total_votes)
+  #  winner = max(vote_percent)
 
+# print(the_poll_final)
 
-with open("PyPoll.csv", 'w') as csv_fileX:
+with open("PyPoll2.csv", 'w') as csv_fileX:
     thisfile = csv.writer(csv_fileX, delimiter = ",")
     thisfile.writerow(['Candidates', 'Votes', 'Percent of Votes'])
     thisfile.writerows(the_poll_final)
+
 
 
 
